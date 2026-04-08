@@ -1,0 +1,214 @@
+<!-- NOTA: HE QUITADO MUCHO CONTENIDO, ES PARA MANTENER LA PRIVACIDAD UN POCO, añade tus lineas y eso :3 -->
+<!-- Habia empezado copiando de internet, pero al final me salia mejor hacerlo yo practicamente desde cero xd -->
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			body { 
+				background: transparent; 
+				color: white; 
+				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+				overflow: hidden;
+			}
+			#chat-container {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-end;
+				height: 100vh;
+				padding: 10px;
+				margin-bottom: 25px;
+			}
+			.message {
+				margin-bottom: 20px;
+				text-shadow: 1px 1px 2px black;
+				animation: fadeIn 0.3s ease-out;
+			}
+			.user { 
+				font-weight: bold;
+				margin-right: 5px;
+			}
+			@keyframes fadeIn { 
+				from { 
+					opacity: 0; transform: translateY(5px);
+				} to { 
+					opacity: 1; transform: translateY(0);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="chat-container"></div>
+
+		<script>
+			const Partes1 = [
+				"Llena",
+			];
+
+			const Partes2 = [
+				"-Esto",
+			];
+
+
+			// MAS COMUN EL ESPACIO, O INCLSO UN 50% DE QUE NO PONGA TERCERA PARTE
+			const Partes3 = [
+				"-Por_favor",				
+			];
+
+			const chat = document.getElementById('chat-container');
+
+			const Donaciones_cantidades = [
+				"Aqui pones lo que quieras, aunque no se usa para nada, no se, 3 centimos o algo :|",
+			]
+
+			const MSGs = [
+				"Hola! Has rellenado ya el archivo HTML? Probablemente te has dejado unas lineas anteriores!",
+			];
+
+			const POSITIVOS_SPAM = [
+				"SIIIIIIII",
+				"WOOOOOOO",
+				"CHAT CHAT CHAT",
+				"HE ESTADO AQUI!!",
+				"EN DIRECTO!!!",
+				"WORLD RECORD?!?!",
+				"Wooooooooooo"
+
+			]
+
+
+			const EMOJIS = [
+				"💀","🛡️","💻","🕵️","😭","🫪","🙏","👀", "🤓", "✨", "🗿",
+			]
+
+
+
+			// Nuestro 'automod'
+			const modposts = [
+				"⚠️  Recordatorio: Este mensaje no es real, por favor, cambialo antes de continuar",
+				"No hacer esto en casa, mejor hacedlo en casa de un amigo!",
+				"[Se ha baneado a un usuario por spam]",
+				"Subscribete tambien en YT: @Cambia_ESTO_YA!!",
+				"Comandos del chat: !cmds",
+				"IMPORTANTE: No compartas informacion personal con otros usuarios del chat",
+			]
+			// Puntos extra si sabes a lo que referencia "No hacer esto en casa, mejor hacedlo en casa de un amigo!"
+			// PERO NO LO BUSQUES EN GOOGLE!
+
+			function generar_msg() {
+				// Genera un mensaje aleatorio con lo de arriba
+				parte1 = Partes1[Math.floor(Math.random() * Partes1.length)];
+				parte2 = Partes2[Math.floor(Math.random() * Partes2.length)];
+				parte3 = Partes3[Math.floor(Math.random() * Partes3.length)];
+
+
+				// ALAETORIEDAD
+				// ---------------------------------------------------------------------
+				if ( Math.floor((Math.random()*4)+1) == 2 ) {
+					console.log("Trigger parte1")
+					parte1 = parte1+Math.floor(Math.random()*25)
+				}
+
+				if ( Math.floor((Math.random()*4)+1) == 2 ) {
+					console.log("Trigger parte2")
+					parte2 = parte2+Math.floor(Math.random()*25)
+				}
+
+				if ( Math.floor((Math.random()*4)+1) == 2 ) {
+					console.log("Trigger parte3")
+					parte3 = parte3+Math.floor(Math.random()*25)
+				}
+
+				if ( Math.floor((Math.random()*4)+1) == 2 ) {
+					console.log("Trigger doble parte3")
+					parte3 = parte3+Partes3[Math.floor(Math.random() * Partes3.length)]
+				} // Aleatoriamente añadir una segunda tercera parte
+				// ---------------------------------------------------------------------
+				// TODO ESTE BLOQUE LO PUEDES QUITAR SI NO QUIERES AÑADIR MAS ALEATORIEDAD
+
+
+				usuario = parte1 + parte2 + parte3;
+
+				let texto = MSGs[Math.floor(Math.random() * MSGs.length)]; // HACER ESTO TAMBIEN MODULAR!!!
+
+				if ( Math.floor(Math.random()*3) == 2 ) {texto = texto+" "+EMOJIS[Math.floor(Math.random() * EMOJIS.length)]} // Añadir emoji un ~25% de las veces
+				// Añadir un emoji? Si no, quita lo de arriba (O cambia las posibilidades, [...]om()*3) == 2 <<< AQUI!!!)
+
+
+				// Estilo Twitch, color "aleatorio"
+				const color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+
+
+				// MAS ALEATORIEDAD; todo mayuscula o minuscula
+				let aleatorio10 = Math.floor(Math.random()*10)
+
+				switch (aleatorio10) {
+					case 3: 
+						console.log("Trigger texto lower")
+						texto=texto.toLowerCase()
+					case 5:
+						console.log("Trigger usuario lower")
+						usuario=usuario.toLowerCase()
+					case 6:
+						console.log("Trigger texto upper")
+						texto=texto.toUpperCase()
+					case 7:
+						console.log("Trigger usuario upper")
+						usuario=usuario.toUpperCase()
+					case 10:
+						console.log("Trigger usuario texto upper")
+						usuario=usuario.toUpperCase()
+						texto=texto.toUpperCase()				
+				}
+
+
+				return { usuario, texto, color };
+			}
+
+
+			function hacerdelay() {  // Cambiame para subir o bajar el tiempo
+				// Antes hacia un +300 para hacer un 'minimo seguro', pero me encanta el caos :D
+				return Math.random() * 1500;
+			}
+
+			function CrearMensajes() {
+				const datos = generar_msg();
+
+				const div = document.createElement('div');
+				div.className = 'message';
+				div.innerHTML = `
+					<span class="user" style="color:${datos.color}">${datos.usuario}:</span>
+					<span class="text">${datos.texto}</span>
+				`;
+
+
+				chat.appendChild(div);
+
+
+				// 1 en cada 10 veces ~o asi~ genera un chat del automod
+				let randomes8 = Math.floor((Math.random() * 10) + 1);
+
+				if (randomes8 == 8) {
+					console.log("Creando post automod")
+					const divmod = document.createElement('div');
+                		        divmod.className = 'message';
+                			divmod.innerHTML = `
+                			        <span class="user" style="color:green;">🛡️ [AUTOMOD]</span>
+                	                        <span class="text">${modposts[Math.floor(Math.random() * modposts.length)]}</span>
+                	                `;
+					chat.appendChild(divmod);
+				}
+
+
+
+				// Solo quedarse con los ultimos 20, el resto sobra y gasta memoria
+				if (chat.childNodes.length > 20) {
+					chat.removeChild(chat.firstChild);
+				}
+
+				setTimeout(CrearMensajes, hacerdelay());
+			}
+
+			CrearMensajes();
+		</script>
+	</body>
+</html>

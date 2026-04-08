@@ -1,0 +1,89 @@
+<!-- Copiado completamente de internet -->
+<html lang="UTF-8">
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+			// Parece asi medio la de los speedrunners
+
+			body {
+				background-color: rgba(0, 0, 0, 0);
+				margin: 0;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+				overflow: hidden;
+				font-family: 'Share Tech Mono', monospace;
+			}
+
+			#timer-display {
+				color: #00ff41;
+				font-size: 80px;
+				text-shadow: 0 0 10px #00ff41;
+				padding: 20px;
+
+			}
+
+			.label {
+				font-size: 14px;
+				color: #555;
+				text-align: right;
+				display: block;
+				margin-top: -10px;
+			}
+		</style>
+	</head>
+	<body onclick="stopstart()"  onload="start()"> <!-- FALTA: UN RESET -->
+		<!-- Si, vale, me he copiado de casi todo, pero algunas cosas son mias -->
+		<div id="container">
+			<div id="timer-display">00:00<span style="font-size: 0.5em;">.00</span></div>
+		</div>
+
+		<script>
+			let time = 0;
+			let EJEC = false;
+			let lastUpdate = 0;
+
+			const display = document.getElementById('timer-display');
+
+			function update(now) {
+				if (!running) { return }
+
+				if (!lastUpdate) { lastUpdate = now }
+
+				dt = now - lastUpdate;
+				lastUpdate = now;
+				time += dt;
+				actualizar();
+				requestAnimationFrame(update); // Si no llamas esto el navegador actualiza cuando 'crea necesario', que deberia ser igual que esto, pero POR SI ACASO
+			}
+
+			function actualizar() {
+				const minutos = Math.floor(time / 60000);
+				const segundos = Math.floor((time % 60000) / 1000);
+				const ms = Math.floor((time % 1000) / 10);
+
+				display.innerHTML = `${minutos.toString().padStart(2, '0')}:` + `${segundos.toString().padStart(2, '0')}` + '<span style="font-size: 0.5em;">' + `.${ms.toString().padStart(2, '0')}</span>`
+			}
+
+			function start() {
+				if (!EJEC) {
+					EJEC = true;
+					lastUpdate = performance.now();
+					requestAnimationFrame(update);
+				}
+			}
+
+			function stopstart() {
+				if (EJEC) {
+					EJEC = false
+				} else {
+					EJEC = true
+					lastUpdate = performance.now()
+					requestAnimationFrame(update)
+				}
+			}
+		</script>
+	</body>
+</html>

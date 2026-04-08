@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+		<style>
+			body {
+				font-family: sans-serif;
+				font-size: 2em;
+				color: red;
+				display: flex;
+			}
+			#usuarios {
+				font-weight: bold; // No cambia mucho
+			}
+		</style>
+		<script>
+			let valor = 200
+			let max = 250
+			let min = 180
+
+			function actualizar() { // Toca estos numeros para hacerlo mas o menos 'brusco'
+				let cambio = Math.floor(Math.random() * 7) - 3;
+				let elemento = document.getElementById('usuarios')
+				valor += cambio
+				elemento.innerHTML = " " + valor
+			}
+		</script>
+	</head>
+	<body onload="setInterval(actualizar, 2500);">
+	        <i class="fa-solid fa-user" style="color: blue;"> </i> <!-- En blue para que se diferencie -->
+	        <span id="usuarios"> 199</span>
+	</body>
+</html>
