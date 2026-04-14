@@ -17,4 +17,8 @@ Un set de archivos JS (HTML) para OBS, para 'simular' que estas en 'directo' (Us
 Genera pequeños bloques de 'info musical' para videos usando moviepy (Transparentes)
 
 ## DRM
-(Nada aun, pronto)
+Herramientas de DRM, de momento:
+- Generador de 'claves'
+- Servidor de licencias (pruebas)
+- ??
+- Usa secrets y base64 de Python
