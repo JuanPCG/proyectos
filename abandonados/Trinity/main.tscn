@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://chl0lpxnqbi2q"]
+
+[ext_resource type="Script" uid="uid://6y88yr6o1uuw" path="res://Scripts/Main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://16y7c4tsiqt3" path="res://Scripts/Audio.gd" id="2_0xm2m"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ig7tw")
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_0xm2m")
+
+[node name="PP" type="Button" parent="."]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 189.0
+offset_right = 290.0
+offset_bottom = 220.0
+focus_mode = 0
+text = "*Inc*"
+
+[node name="Lista_Repr" type="ItemList" parent="."]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+allow_search = false
+auto_width = true
+fixed_icon_size = Vector2i(16, 16)
+
+[node name="Infor" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Img" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -128.0
+offset_right = 128.0
+grow_vertical = 0
+expand_mode = 1
+
+[connection signal="finished" from="Audio" to="Audio" method="FIN_NATURAL"]
+[connection signal="pressed" from="PP" to="." method="PlayPause"]
+[connection signal="item_selected" from="Lista_Repr" to="Audio" method="iniciar_c"]

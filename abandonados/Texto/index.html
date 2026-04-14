@@ -1,0 +1,60 @@
+<head>
+<title>Generador GBoard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap" rel="stylesheet"> // La fuente esa del teclado de Google
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<style>
+body {
+  font-family: "DynaPuff", system-ui;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-size: 64px;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+#colortext {
+  display: none;
+}
+</style>
+<script>
+colores = ["red","#786662","green"]
+async function colorear(_Texto, Color){
+	if(_Texto){ // Si el cliente nos llama en su navegador con algun texto en la funcion.
+		_Texto=_Texto.toString()
+		console.log(_Texto)
+		texto = document.getElementById("texto").value
+	        document.getElementById("colortext").style.display = "inline-block"
+	        texto = _Texto.replace(/\n/g, '<br>');
+	        res = _Texto.fontcolor(colores[Math.floor(Math.random() * colores.length)]);
+	        document.getElementById("colortext").innerHTML=res
+	        const canvas = await html2canvas(document.getElementById("colortext"), {backgroundColor: null});
+	        document.getElementById("CajaImagen").src = canvas.toDataURL("image/png")
+	        document.getElementById("colortext").style.display = "none"
+	} else { // Si no, continuar con el texto que hay en la "caja de texto"
+		texto = document.getElementById("texto").value
+		document.getElementById("colortext").style.display = "inline-block"
+		texto = texto.replace(/\n/g, '<br>');
+		res = texto.fontcolor(colores[Math.floor(Math.random() * colores.length)]);
+		document.getElementById("colortext").innerHTML=res
+		const canvas = await html2canvas(document.getElementById("colortext"), {backgroundColor: null});
+		document.getElementById("CajaImagen").src = canvas.toDataURL("image/png")
+		document.getElementById("colortext").style.display = "none"
+	}
+}
+// Dividir esto en parte de _Texto y no, aplicar variable Color en fontcolor de texto
+</script>
+
+</head>
+<body> // Esta parte es una porqueria
+<h1 id="colortext" style="display: fit-content;">Escribe tu texto abajo</h1>
+<p \>
+<textarea rows="4" id="texto" placeholder="Write your text here! "></textarea>
+<button onclick="colorear()" style="font-size: 32px;">Dale... Mister worlwaid</button>
+<p \>
+<img id="CajaImagen" \>
+</body>
+
+
+<!--- <input type="color" id="colorpick" value="#000000""> --->
