@@ -22,3 +22,9 @@ Herramientas de DRM, de momento:
 - Servidor de licencias (pruebas)
 - ??
 - Usa secrets y base64 de Python
+
+## testtrans
+
+Cosas de transparencia de video y eso
+VP9 (WebM)
+Visitalo en vivo en https://ricardomilos.pages.dev/
