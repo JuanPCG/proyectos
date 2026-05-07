@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+
+		<meta charset="UTF-8">
+		<title>Cambiame</title>
+		<link id="favicon" rel="icon" type="image/x-icon" href="https://www.google.com/favicon.ico">
+	    
+		<style>
+			body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+			.control { margin-bottom: 15px; }
+			label { display: block; font-weight: bold; }
+		</style>
+
+		<script>
+			function actualizarTodo() {
+				document.title = document.getElementById("titulo").value;
+
+				const inputArchivo = document.getElementById("input-file");
+				const linkFavicon = document.getElementById("favicon");
+
+				if (inputArchivo.files && inputArchivo.files[0]) {
+					const lector = new FileReader();
+
+					lector.onload = function(e) {
+						linkFavicon.href = e.target.result;
+					};
+
+					lector.readAsDataURL(inputArchivo.files[0]);
+				}
+			}
+
+			function trollface() {
+				document.getElementById('todo').style.display = "none";
+				const imgTroll = document.getElementById('troll');
+				imgTroll.style.display = "block";
+			}
+			
+		</script>
+	</head>
+	<body>
+		<div id='todo'>
+			<h2>Configurador de Pestaña</h2>
+
+			<div class="control">
+			<label>Nuevo Título:</label>
+			<input type="text" id="titulo" placeholder="Ej: Inbox (99+)">
+			</div>
+
+			<div class="control">
+			<label>Nuevo Icono (Favicon):</label>
+			<input type="file" id="input-file" accept="image/*">
+
+			</div>
+
+			<button onclick="actualizarTodo()">Aplicar cambios</button>
+			<button onclick="trollface()">Aplicar trollface</button>
+		</div>
+		<img id="troll" src="trollface.webp" style="display: none; width:100vw; height:100vh; object-fit: contain;">
+	</body>
+</html>
